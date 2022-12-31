@@ -127,7 +127,7 @@ class BookingRepository extends BaseRepository
      */
     public function store($user, $data)
     {
-
+        //no validation
         $immediatetime = 5;
         $consumer_type = $user->userMeta->consumer_type;
         if ($user->user_type == env('CUSTOMER_ROLE_ID')) {

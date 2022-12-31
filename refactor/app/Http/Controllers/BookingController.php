@@ -40,7 +40,8 @@ class BookingController extends Controller
             $response = $this->repository->getUsersJobs($user_id);
 
         }
-        elseif($request->__authenticatedUser->user_type == env('ADMIN_ROLE_ID') || $request->__authenticatedUser->user_type == env('SUPERADMIN_ROLE_ID'))
+        //should use role table from database instead of env varables.
+        elseif(\Auth::user()->user_type == env('ADMIN_ROLE_ID') || \Auth::user()->user_type == env('SUPERADMIN_ROLE_ID'))
         {
             $response = $this->repository->getAll($request);
         }
@@ -52,6 +53,7 @@ class BookingController extends Controller
      * @param $id
      * @return mixed
      */
+    //should have comment to understand this.
     public function show($id)
     {
         $job = $this->repository->with('translatorJobRel.user')->find($id);
